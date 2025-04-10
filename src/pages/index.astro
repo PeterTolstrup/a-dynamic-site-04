@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import ProductCard from "../components/ProductCard.astro";
+
+const url = "https://tzufnywxqscsndrelzgq.supabase.co/rest/v1/bareen";
+const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR6dWZueXd4cXNjc25kcmVsemdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQyMTc0NTAsImV4cCI6MjA1OTc5MzQ1MH0.H8yA-T1SEPU6nE_xdzI3NBNujBk0zQelGvW_u-IWCVA";
+
+const options = {
+  headers: {
+    apikey: key,
+  },
+};
+
+const request = await fetch(url, options);
+const data = await request.json();
+
+console.log("data", data);
+---
+
+<Layout title="home">
+  <Header title="Welcome Home">
+    <p>Feel right at home!</p>
+  </Header>
+  <section>
+    <h2>Products</h2>
+    <p>Here are some products</p>
+    <div class="products">
+      {
+        data.map((product) => {
+          return <ProductCard data={product} />;
+        })
+      }
+    </div>
+  </section>
+</Layout>
+<style>
+  section {
+    padding: 2rem;
+  }
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around;
+    padding-top: 2rem;
+  }
+</style>
