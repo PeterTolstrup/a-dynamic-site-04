@@ -18,3 +18,7 @@ h4 {
 p {
   padding-bottom: 0.25rem;
 }
+
+img {
+  max-width: 100%;
+}
